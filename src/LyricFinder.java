@@ -32,14 +32,11 @@ public class LyricFinder {
 	 * @param searchTerms the terms to search for
 	 * @return the URL of the search results
 	 */
-	public static String prepareSearch(String searchTerms)
+	public static String prepareSearch(String songName, String artistName)
 	{
-		String AZLyricsSearchURL = "http://search.azlyrics.com/search.php?q=";
-		String MusixMatchSearchURL = "https://www.musixmatch.com/search/";
-
-		
-		searchTerms = searchTerms.replaceAll(" ", "%20").replaceAll("'", "%27");
-		return MusixMatchSearchURL + searchTerms;
+		String geniusSearchURL = "http://genius.com/search?q=";
+		String searchTerms = (songName + " " + artistName).replaceAll(" ", "%20").replaceAll("'", "%27");
+		return geniusSearchURL + searchTerms;
 	}
 	
 	/**
@@ -69,7 +66,7 @@ public class LyricFinder {
 		try {
 			doc = Jsoup.connect(url).userAgent("Mozilla").get();
 			lyricsElements = doc.getElementsByClass("lyrics");
-			// get pretty printed html with preserved br and p tags
+			// get pretty printed html with preserved br tags
 		    String prettyPrintedBodyFragment = Jsoup.clean(lyricsElements.html(), "", Whitelist.none().addTags("br"), new Document.OutputSettings().prettyPrint(true));
 		    // get plain text with preserved line breaks by disabled prettyPrint
 		    lyricsText = Jsoup.clean(prettyPrintedBodyFragment, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));

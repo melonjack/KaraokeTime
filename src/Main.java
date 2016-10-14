@@ -16,7 +16,7 @@ public class Main {
 		sc.close();
 		
 		System.out.println("Searching for: " + WordUtils.capitalize(songName) + " by " + WordUtils.capitalize(artistName));
-		//String searchURL = LyricFinder.prepareSearch(searchTerms);
+		String searchURL = LyricFinder.prepareSearch(songName, artistName);
 		//Elements cards = LyricFinder.getSearchPageElements(searchURL);
 		//LyricFinder.getLyricsURL(cards);
 		LyricFinder.getLyrics("http://genius.com/Billy-joel-the-longest-time-lyrics");
