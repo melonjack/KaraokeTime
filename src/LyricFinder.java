@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
 public class LyricFinder {
@@ -58,6 +59,26 @@ public class LyricFinder {
 			System.out.println(lyricsURL);
 		}
 		return lyricsURL;
+	}
+	
+	public static String getLyrics(String url)
+	{
+		Document doc = null;
+		Elements lyricsElements = null;
+		String lyricsText = null;
+		try {
+			doc = Jsoup.connect(url).userAgent("Mozilla").get();
+			lyricsElements = doc.getElementsByClass("lyrics");
+			// get pretty printed html with preserved br and p tags
+		    String prettyPrintedBodyFragment = Jsoup.clean(lyricsElements.html(), "", Whitelist.none().addTags("br"), new Document.OutputSettings().prettyPrint(true));
+		    // get plain text with preserved line breaks by disabled prettyPrint
+		    lyricsText = Jsoup.clean(prettyPrintedBodyFragment, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+		} catch (IOException e) {
+			System.out.println("Error: could not connect to lyrics URL.");
+			e.printStackTrace();
+		}
+		System.out.println(lyricsText);
+		return lyricsText;
 	}
 
 }
