@@ -1,22 +1,15 @@
 import java.io.IOException;
-import java.util.Scanner;
-
-import org.apache.commons.lang3.text.WordUtils;
-import org.jsoup.select.Elements;
+import java.util.ArrayList;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		System.out.println("Enter the song you'd like to search for: ");
-		Scanner sc = new Scanner(System.in);
-		String songName = sc.nextLine();
-		System.out.println("Enter the artist you'd like to search for: ");
-		String artistName = sc.nextLine();
-		sc.close();
+		ArrayList<String> searchTerms = InputReader.getSearchInfo();
 		
-		System.out.println("Searching for: " + WordUtils.capitalize(songName) + " by " + WordUtils.capitalize(artistName));
-		String searchURL = LyricFinder.prepareSearch(songName, artistName);
+		System.out.println("Searching for: " + searchTerms.get(0) + " by " + searchTerms.get(1));
+		String searchURL = LyricFinder.prepareSearch(searchTerms.get(0), searchTerms.get(1));
+		System.out.println(searchURL);
 		//Elements cards = LyricFinder.getSearchPageElements(searchURL);
 		//LyricFinder.getLyricsURL(cards);
 		LyricFinder.getLyrics("http://genius.com/Billy-joel-the-longest-time-lyrics");
