@@ -12,7 +12,7 @@ public class Main {
 		System.out.println(searchURL);
 		//Elements cards = LyricFinder.getSearchPageElements(searchURL);
 		//LyricFinder.getLyricsURL(cards);
-		LyricFinder.getLyrics("http://genius.com/Billy-joel-the-longest-time-lyrics");
+		LyricFinder.getLyrics("http://genius.com/Death-cab-for-cutie-i-will-follow-you-into-the-dark-lyrics");
 		
 	}
 
